@@ -39,7 +39,7 @@
                         </a>
                     </div>
                     <div>
-                        <a href="{{ route('login') }}"
+                        <a href="{{ route('filament.clinic.auth.login') }}"
                            class="inline-flex items-center px-4 py-2 bg-purple-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-purple-500 focus:bg-purple-700 active:bg-purple-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-400 transition ease-in-out duration-150">
                             {{ __('Staff Login') }}
                         </a>
@@ -49,20 +49,17 @@
         </header>
 
         <!-- Main Content -->
-        <main class="min-h-screen bg-slate-950 text-slate-100">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-10">
-
-
-
+        <main class="min-h-screen bg-slate-950 text-slate-100 flex items-center justify-center">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 space-y-10">
 
             <section class="space-y-4">
-                    <h2 class="text-sm font-semibold tracking-[0.25em] uppercase text-slate-400">
-                        {{ __('------------------------------------------------Welcome to the School Clinic Portal------------------------------------------------') }}
+                    <h2 class="text-md font-bold tracking-[0.25em] uppercase text-slate-400 py-5">
+                        {{ __('-------------------------------Welcome to the School Clinic Portal---------------------------------') }}
                     </h2>
 
                 <!-- Top cards: Apply / Continue / Update -->
                 <section class="grid gap-6 md:grid-cols-3">
-                    <a href="#apply"
+                    <a href="{{ route('filament.clinic.resources.visits.create') }}"
                        class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#df8811] via-[#df8811]s to-slate-900 p-6 sm:p-8 shadow-lg border border-orange-400/40 hover:-translate-y-1 hover:shadow-2xl transition">
                         <div class="absolute inset-0 opacity-30"
                              style="background-image: radial-gradient(circle at 0 0, rgba(15,23,42,0.6), transparent 50%);">
@@ -70,13 +67,13 @@
                         <div class="relative flex flex-col h-full justify-between">
                             <div class="space-y-2">
                                 <p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-900/80">
-                                    {{ __('Case Registration') }}
+                                    {{ __('New Visit Registration') }}
                                 </p>
                                 <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-950">
-                                    {{ __('New Case Registration') }}
+                                    {{ __('New Visit') }}
                                 </h2>
                                 <p class="text-sm text-slate-900/80">
-                                    {{ __('Start a new admission request for a student joining our Pioneer schools.') }}
+                                    {{ __('Create a new record for a visit by either a student or staff member.') }}
                                 </p>
                             </div>
                             <span class="mt-4 inline-flex items-center text-xs font-semibold text-slate-900 uppercase tracking-widest">
@@ -88,7 +85,7 @@
                         </div>
                     </a>
 
-                    <a href="#continue"
+                    <a href="{{ route('filament.clinic.resources.incidents.create') }}"
                        class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-slate-800 via-slate-900 to-slate-950 p-6 sm:p-8 shadow-lg border border-slate-600/60 hover:-translate-y-1 hover:shadow-2xl transition">
                         <div class="absolute inset-0 opacity-30"
                              style="background-image: radial-gradient(circle at 100% 0, rgba(56,189,248,0.4), transparent 55%);">
@@ -96,17 +93,17 @@
                         <div class="relative flex flex-col h-full justify-between">
                             <div class="space-y-2">
                                 <p class="text-xs font-semibold uppercase tracking-[0.2em] text-sky-300/80">
-                                    {{ __('Continue') }}
+                                    {{ __('New Case Registration') }}
                                 </p>
                                 <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight">
-                                    {{ __('Continue Applying') }}
+                                    {{ __('New Case') }}
                                 </h2>
                                 <p class="text-sm text-slate-300">
-                                    {{ __('Use your admission reference to pick up where you left off.') }}
+                                    {{ __('Create a new incident or case record.') }}
                                 </p>
                             </div>
                             <span class="mt-4 inline-flex items-center text-xs font-semibold text-sky-300 uppercase tracking-widest">
-                                {{ __('Resume application') }}
+                                {{ __('open form') }}
                                 <svg class="ml-2 h-3 w-3" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                     <path fill-rule="evenodd" d="M5.22 4.22a.75.75 0 011.06 0L14 11.94V6.75a.75.75 0 011.5 0v7.5a.75.75 0 01-.75.75h-7.5a.75.75 0 010-1.5h5.19L4.22 5.28a.75.75 0 010-1.06z" clip-rule="evenodd" />
                                 </svg>
@@ -114,7 +111,7 @@
                         </div>
                     </a>
 
-                    <a href="#update"
+                    <a href="{{ route('filament.clinic.resources.items.create') }}"
                        class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-amber-400 via-orange-500 to-slate-900 p-6 sm:p-8 shadow-lg border border-amber-400/50 hover:-translate-y-1 hover:shadow-2xl transition">
                         <div class="absolute inset-0 opacity-30"
                              style="background-image: radial-gradient(circle at 100% 100%, rgba(15,23,42,0.7), transparent 55%);">
@@ -122,13 +119,13 @@
                         <div class="relative flex flex-col h-full justify-between">
                             <div class="space-y-2">
                                 <p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-900/80">
-                                    {{ __('Update') }}
+                                    {{ __('New Medication') }}
                                 </p>
                                 <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-950">
-                                    {{ __('Application Update') }}
+                                    {{ __('New Medication') }}
                                 </h2>
                                 <p class="text-sm text-slate-900/80">
-                                    {{ __('Change contact details, programme choices, or upload missing documents.') }}
+                                    {{ __('Create a new medication record.') }}
                                 </p>
                             </div>
                             <span class="mt-4 inline-flex items-center text-xs font-semibold text-slate-900 uppercase tracking-widest">
@@ -143,7 +140,7 @@
 
                 <!-- School cards -->
                 <section class="space-y-4">
-                    <h2 class="text-sm font-semibold tracking-[0.25em] uppercase text-slate-400">
+                    <h2 class="text-xl font-semibold text-center tracking-[0.25em] py-8 uppercase text-slate-400">
                         {{ __('Our Schools') }}
                     </h2>
 
