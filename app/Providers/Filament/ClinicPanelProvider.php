@@ -11,6 +11,8 @@ use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
 use Filament\Widgets;
+use App\Filament\Clinic\Pages\ClinicDashboard;
+use App\Http\Middleware\EnsureClinicRole;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
@@ -18,11 +20,14 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
+
+
 class ClinicPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
     {
         return $panel
+            ->default()
             ->id('clinic')
             ->path('clinic')
             ->login()
@@ -33,7 +38,7 @@ class ClinicPanelProvider extends PanelProvider
             ->discoverResources(in: app_path('Filament/Clinic/Resources'), for: 'App\\Filament\\Clinic\\Resources')
             ->discoverPages(in: app_path('Filament/Clinic/Pages'), for: 'App\\Filament\\Clinic\\Pages')
             ->pages([
-                Pages\Dashboard::class,
+                ClinicDashboard::class,
             ])
             ->discoverWidgets(in: app_path('Filament/Clinic/Widgets'), for: 'App\\Filament\\Clinic\\Widgets')
             ->middleware([
@@ -49,6 +54,7 @@ class ClinicPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
+                EnsureClinicRole::class,
             ]);
     }
 }
