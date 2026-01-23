@@ -11,8 +11,8 @@ use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
 use Filament\Widgets;
-use App\Filament\Clinic\Pages\ClinicDashboard;
-use App\Http\Middleware\EnsureClinicRole;
+use App\Filament\Parent\Pages\ParentDashboard;
+use App\Http\Middleware\EnsureParentRole;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
@@ -20,27 +20,26 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
-
-
-class ClinicPanelProvider extends PanelProvider
+class ParentPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
     {
         return $panel
-            ->default()
-            ->id('clinic')
-            ->path('clinic')
+            ->id('parent')
+            ->path('parent')
             ->login()
             ->colors([
-                'primary' => Color::Blue,
+                'primary' => Color::Indigo,
             ])
-            ->brandName('School Clinic Portal')
-            ->discoverResources(in: app_path('Filament/Clinic/Resources'), for: 'App\\Filament\\Clinic\\Resources')
-            ->discoverPages(in: app_path('Filament/Clinic/Pages'), for: 'App\\Filament\\Clinic\\Pages')
+            ->brandName('Parent Portal')
+            ->brandLogo(asset('images/parent-portal-logo.svg'))
+            ->favicon(asset('favicon.ico'))
+            ->discoverResources(in: app_path('Filament/Parent/Resources'), for: 'App\\Filament\\Parent\\Resources')
+            ->discoverPages(in: app_path('Filament/Parent/Pages'), for: 'App\\Filament\\Parent\\Pages')
             ->pages([
-                ClinicDashboard::class,
+                ParentDashboard::class,
             ])
-            ->discoverWidgets(in: app_path('Filament/Clinic/Widgets'), for: 'App\\Filament\\Clinic\\Widgets')
+            ->discoverWidgets(in: app_path('Filament/Parent/Widgets'), for: 'App\\Filament\\Parent\\Widgets')
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,
@@ -51,10 +50,15 @@ class ClinicPanelProvider extends PanelProvider
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
-                EnsureClinicRole::class, // Moved here so it can check login pages before auth
             ])
             ->authMiddleware([
                 Authenticate::class,
+                EnsureParentRole::class,
+            ])
+            ->navigationGroups([
+                'My Children',
+                'Medical Reports',
+                'Settings',
             ]);
     }
 }

@@ -20,6 +20,7 @@ class UserSeeder extends Seeder
             'doctor',
             'admin',
             'principal_readonly',
+            'parent',
         ];
 
         foreach ($roles as $roleName) {
@@ -70,11 +71,34 @@ class UserSeeder extends Seeder
         );
         $principal->assignRole('principal_readonly');
 
+        // Create parent user
+        $parent = User::firstOrCreate(
+            ['email' => 'parent@schoolclinic.com'],
+            [
+                'name' => 'John Parent',
+                'password' => Hash::make('password'),
+                'email_verified_at' => now(),
+            ]
+        );
+        $parent->assignRole('parent');
+
+        // Create guardian record for parent
+        $guardian = \App\Models\Guardian::firstOrCreate(
+            ['user_id' => $parent->id],
+            [
+                'full_name' => 'John Parent',
+                'phone' => '+254712345678',
+                'email' => 'parent@schoolclinic.com',
+                'relationship' => 'PARENT',
+            ]
+        );
+
         $this->command->info('Users created successfully!');
         $this->command->info('Default password for all users: password');
         $this->command->info('Admin: admin@schoolclinic.com');
         $this->command->info('Nurse: nurse@schoolclinic.com');
         $this->command->info('Doctor: doctor@schoolclinic.com');
         $this->command->info('Principal: principal@schoolclinic.com');
+        $this->command->info('Parent: parent@schoolclinic.com');
     }
 }

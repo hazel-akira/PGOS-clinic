@@ -46,4 +46,24 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    /**
+     * Get the guardian record associated with this user (if parent).
+     */
+    public function guardian()
+    {
+        return $this->hasOne(Guardian::class);
+    }
+
+    /**
+     * Get all students linked to this parent user.
+     */
+    public function students()
+    {
+        if (!$this->guardian) {
+            return collect();
+        }
+
+        return $this->guardian->students();
+    }
 }

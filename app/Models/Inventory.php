@@ -17,8 +17,6 @@ class Inventory extends Model
         'batch_number',
         'expiry_date',
         'manufacture_date',
-        'quantity_in',
-        'quantity_out',
         'quantity_available',
         'minimum_stock_level',
         'supplier_name',

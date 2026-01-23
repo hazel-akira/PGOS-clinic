@@ -46,6 +46,27 @@ class Person extends Model
     }
 
     /**
+     * Get the guardians linked to this person (student).
+     */
+    public function guardians()
+    {
+        return $this->belongsToMany(
+            Guardian::class,
+            'guardian_links',
+            'student_person_id',
+            'guardian_id'
+        )->withPivot('is_primary', 'notes')->withTimestamps();
+    }
+
+    /**
+     * Get the guardian links for this person.
+     */
+    public function guardianLinks(): HasMany
+    {
+        return $this->hasMany(GuardianLink::class, 'student_person_id');
+    }
+
+    /**
      * Get the person's full name.
      */
     public function getFullNameAttribute(): string

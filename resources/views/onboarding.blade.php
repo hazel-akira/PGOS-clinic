@@ -39,7 +39,7 @@
                         </a>
                     </div>
                     <div>
-                        <a href="{{ route('filament.clinic.auth.login') }}"
+                        <a href="{{ url('/clinic/login') }}"
                            class="inline-flex items-center px-4 py-2 bg-purple-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-purple-500 focus:bg-purple-700 active:bg-purple-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-400 transition ease-in-out duration-150">
                             {{ __('Staff Login') }}
                         </a>
