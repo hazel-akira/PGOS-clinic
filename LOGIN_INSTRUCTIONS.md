@@ -46,7 +46,7 @@
    ```bash
    php artisan db:seed --class=UserSeeder
    ```
-
+ 
 3. **Clear cache:**
    ```bash
    php artisan optimize:clear

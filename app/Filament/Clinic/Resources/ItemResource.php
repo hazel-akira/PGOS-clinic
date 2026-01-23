@@ -22,7 +22,7 @@ class ItemResource extends Resource
     
     protected static ?string $pluralModelLabel = 'Items';
     
-    protected static ?int $navigationSort = 4;
+    protected static ?int $navigationSort = 5;
 
     public static function form(Form $form): Form
     {
@@ -103,12 +103,22 @@ class ItemResource extends Resource
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make()
-                    ->visible(fn () => auth()->user()->hasRole('admin')),
+                    ->visible(function () {
+                    /** @var User|null $user */
+                    $user = filament()->auth()->user();
+
+                    return $user?->hasRole('admin');
+                }),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make()
-                        ->visible(fn () => auth()->user()->hasRole('admin')),
+                        ->visible(function () {
+                    /** @var User|null $user */
+                    $user = filament()->auth()->user();
+
+                    return $user?->hasRole('admin');
+                }),
                 ]),
             ]);
     }
