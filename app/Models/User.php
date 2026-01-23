@@ -46,4 +46,29 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    /**
+     * Get the guardian profile for this user.
+     */
+    public function guardian()
+    {
+        return $this->hasOne(Guardian::class);
+    }
+
+    /**
+     * Get all students linked to this user (through guardian).
+     */
+    public function students()
+    {
+        return $this->hasManyThrough(
+            Person::class,
+            GuardianLink::class,
+            'guardian_id',
+            'id',
+            'id',
+            'student_person_id'
+        )->whereHas('guardianLinks', function ($query) {
+            $query->where('guardian_id', $this->guardian?->id);
+        });
+    }
 }

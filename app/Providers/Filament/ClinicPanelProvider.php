@@ -32,9 +32,12 @@ class ClinicPanelProvider extends PanelProvider
             ->path('clinic')
             ->login()
             ->colors([
-                'primary' => Color::Blue,
+                'primary' => Color::hex('#1e3a5f'),
+                'secondary' => Color::hex('#df8811'),
             ])
             ->brandName('School Clinic Portal')
+            ->brandLogo(asset('favicon.ico'))
+            ->favicon(asset('favicon.ico'))
             ->discoverResources(in: app_path('Filament/Clinic/Resources'), for: 'App\\Filament\\Clinic\\Resources')
             ->discoverPages(in: app_path('Filament/Clinic/Pages'), for: 'App\\Filament\\Clinic\\Pages')
             ->pages([

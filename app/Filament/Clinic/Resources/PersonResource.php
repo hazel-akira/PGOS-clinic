@@ -3,6 +3,7 @@
 namespace App\Filament\Clinic\Resources;
 
 use App\Filament\Clinic\Resources\PersonResource\Pages;
+use App\Filament\Clinic\Resources\PersonResource\RelationManagers;
 use App\Models\Person;
 use App\Models\School;
 use Filament\Forms;
@@ -98,7 +99,14 @@ class PersonResource extends Resource
                                 'other' => 'Other',
                             ]),
                         Forms\Components\DatePicker::make('dob')
-                            ->label('Date of Birth'),
+                            ->label('Date of Birth')
+                            ->reactive()
+                            ->afterStateUpdated(function ($state, callable $set) {
+                                if ($state) {
+                                    $age = \Carbon\Carbon::parse($state)->age;
+                                    // Age is calculated automatically via accessor
+                                }
+                            }),
                         Forms\Components\TextInput::make('phone')
                             ->tel()
                             ->maxLength(255),
@@ -114,6 +122,29 @@ class PersonResource extends Resource
                             ->required(),
                     ])
                     ->columns(2),
+                Forms\Components\Section::make('Enrollment Information')
+                    ->schema([
+                        Forms\Components\TextInput::make('enrolment.stream')
+                            ->label('Class/Stream')
+                            ->maxLength(255)
+                            ->placeholder('e.g., Form 2A, Grade 5')
+                            ->visible(fn (callable $get) => $get('person_type') === 'STUDENT'),
+                        Forms\Components\Select::make('enrolment.boarding_status')
+                            ->label('Boarding Status')
+                            ->options([
+                                'DAY' => 'Day Scholar',
+                                'BOARDING' => 'Boarding',
+                            ])
+                            ->default('DAY')
+                            ->visible(fn (callable $get) => $get('person_type') === 'STUDENT'),
+                        Forms\Components\TextInput::make('department')
+                            ->label('Department')
+                            ->maxLength(255)
+                            ->placeholder('e.g., Mathematics, Administration')
+                            ->visible(fn (callable $get) => $get('person_type') === 'STAFF'),
+                    ])
+                    ->columns(2)
+                    ->visible(fn (callable $get) => in_array($get('person_type'), ['STUDENT', 'STAFF'])),
             ]);
     }
 
@@ -146,6 +177,16 @@ class PersonResource extends Resource
                 Tables\Columns\TextColumn::make('gender')
                     ->badge()
                     ->sortable(),
+                Tables\Columns\TextColumn::make('dob')
+                    ->label('Date of Birth')
+                    ->date()
+                    ->sortable()
+                    ->toggleable(),
+                Tables\Columns\TextColumn::make('age')
+                    ->label('Age')
+                    ->getStateUsing(fn (Person $record): ?string => $record->age ? "{$record->age} years" : null)
+                    ->sortable(query: fn ($query, string $direction) => $query->orderBy('dob', $direction))
+                    ->toggleable(),
                 Tables\Columns\TextColumn::make('status')
                     ->badge()
                     ->color(fn (string $state): string => match ($state) {
@@ -193,7 +234,11 @@ class PersonResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\GuardiansRelationManager::class,
+            RelationManagers\AllergiesRelationManager::class,
+            RelationManagers\ChronicConditionsRelationManager::class,
+            RelationManagers\ConsentsRelationManager::class,
+            RelationManagers\VisitsRelationManager::class,
         ];
     }
 
