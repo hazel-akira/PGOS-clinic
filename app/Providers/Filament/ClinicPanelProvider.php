@@ -35,8 +35,8 @@ class ClinicPanelProvider extends PanelProvider
                 'primary' => Color::hex('#1e3a5f'),
                 'secondary' => Color::hex('#df8811'),
             ])
-            ->brandName('School Clinic Portal')
-            ->brandLogo(asset('favicon.ico'))
+            ->brandName('PGoS Clinic Management System')
+            ->brandLogo(asset('pgos_logo.webp'))
             ->favicon(asset('favicon.ico'))
             ->discoverResources(in: app_path('Filament/Clinic/Resources'), for: 'App\\Filament\\Clinic\\Resources')
             ->discoverPages(in: app_path('Filament/Clinic/Pages'), for: 'App\\Filament\\Clinic\\Pages')

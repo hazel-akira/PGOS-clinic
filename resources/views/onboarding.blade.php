@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }} - School Health Clinic</title>
+        <title>PGoS Clinic Management System</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -54,7 +54,7 @@
 
             <section class="space-y-4">
                     <h2 class="text-md font-bold tracking-[0.25em] uppercase text-slate-400 py-5">
-                        {{ __('-------------------------------Welcome to the School Clinic Portal---------------------------------') }}
+                        {{ __('-------------------------------Welcome to PGoS Clinic Management System---------------------------------') }}
                     </h2>
 
                 <!-- Top cards: Apply / Continue / Update -->

@@ -1,8 +1,8 @@
-# School Clinic Management Portal - Setup Guide
+# PGoS Clinic Management System - Setup Guide
 
 ## Overview
 
-This is a Laravel-based School Clinic/Dispensary Management Portal for Pioneer Group of schools. The system is designed to handle sensitive medical data with compliance considerations.
+This is a Laravel-based Clinic Management System for Pioneer Group of Schools (PGoS). The system is designed to handle sensitive medical data with compliance considerations.
 
 ## Tech Stack
 
@@ -140,7 +140,7 @@ php artisan route:clear
 
 Key settings in `.env`:
 ```env
-APP_NAME="School Clinic Portal"
+APP_NAME="PGoS Clinic Management System"
 DB_CONNECTION=sqlite
 DB_DATABASE=/home/engineer/Desktop/school-clinic/database/database.sqlite
 SESSION_LIFETIME=30
