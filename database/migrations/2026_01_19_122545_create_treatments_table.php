@@ -11,7 +11,7 @@ return new class extends Migration
         Schema::create('treatments', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->uuid('visit_id');
-            
+
             $table->foreign('visit_id')->references('id')->on('visits')->onDelete('cascade');
             $table->text('description');
             $table->text('instructions')->nullable();
@@ -22,7 +22,7 @@ return new class extends Migration
             $table->foreign('performed_by_user_id')->references('id')->on('app_users')->onDelete('restrict');
             $table->timestamp('performed_at')->useCurrent();
             $table->timestamps();
-            
+
             $table->index(['visit_id', 'performed_at']);
         });
     }

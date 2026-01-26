@@ -12,14 +12,14 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-
 class MedicationResource extends Resource
 {
-    protected static ?string $model = Medication::class; 
+    protected static ?string $model = Medication::class;
+
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+
     protected static ?int $navigationSort = 3;
 
-    
     public static function getEloquentQuery(): Builder
     {
         return parent::getEloquentQuery()
@@ -27,6 +27,7 @@ class MedicationResource extends Resource
                 SoftDeletingScope::class,
             ]);
     }
+
     public static function form(Form $form): Form
     {
         return $form
@@ -116,10 +117,10 @@ class MedicationResource extends Resource
             ->actions([
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
-                
+
             ])
             ->bulkActions([
-               
+
             ]);
     }
 

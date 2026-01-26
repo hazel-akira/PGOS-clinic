@@ -18,7 +18,7 @@ return new class extends Migration
                 'DATA_PROCESSING',
                 'REFERRAL',
                 'IMMUNIZATION',
-                'OTHER'
+                'OTHER',
             ]);
             $table->string('given_by'); // guardian name / adult patient
             $table->string('relationship')->nullable();
@@ -28,7 +28,7 @@ return new class extends Migration
             $table->timestamp('expires_at')->nullable();
             $table->uuid('evidence_attachment_id')->nullable();
             $table->timestamps();
-            
+
             $table->index(['person_id', 'consent_type']);
             $table->index('expires_at');
         });

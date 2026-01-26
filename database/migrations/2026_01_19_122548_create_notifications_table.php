@@ -20,7 +20,7 @@ return new class extends Migration
             $table->enum('status', ['QUEUED', 'SENT', 'FAILED'])->default('QUEUED');
             $table->timestamp('sent_at')->nullable();
             $table->timestamps();
-            
+
             $table->index(['person_id', 'status']);
             $table->index('status');
         });

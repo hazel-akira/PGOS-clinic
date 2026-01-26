@@ -17,7 +17,7 @@ return new class extends Migration
             $table->boolean('is_primary')->default(false);
             $table->text('notes')->nullable();
             $table->timestamps();
-            
+
             $table->unique(['student_person_id', 'guardian_id']);
             $table->index('is_primary');
         });

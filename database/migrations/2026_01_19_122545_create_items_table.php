@@ -18,7 +18,7 @@ return new class extends Migration
             $table->boolean('is_medicine')->default(true);
             $table->boolean('active')->default(true);
             $table->timestamps();
-            
+
             $table->index(['is_medicine', 'active']);
         });
     }

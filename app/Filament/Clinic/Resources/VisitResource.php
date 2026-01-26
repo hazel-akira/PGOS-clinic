@@ -19,13 +19,13 @@ class VisitResource extends Resource
     protected static ?string $model = Visit::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-clipboard-document-check';
-    
+
     protected static ?string $navigationLabel = 'Clinic Visits';
-    
+
     protected static ?string $modelLabel = 'Visit';
-    
+
     protected static ?string $pluralModelLabel = 'Visits';
-    
+
     protected static ?int $navigationSort = 2;
 
     public static function form(Form $form): Form

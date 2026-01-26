@@ -3,7 +3,6 @@
 namespace App\Filament\Clinic\Resources;
 
 use App\Filament\Clinic\Resources\IncidentResource\Pages;
-use App\Filament\Clinic\Resources\IncidentResource\RelationManagers;
 use App\Models\Incident;
 use App\Models\Person;
 use App\Models\School;
@@ -14,7 +13,6 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Facades\Auth;
 
 class IncidentResource extends Resource
@@ -22,13 +20,13 @@ class IncidentResource extends Resource
     protected static ?string $model = Incident::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-exclamation-triangle';
-    
+
     protected static ?string $navigationLabel = 'Incidents & Cases';
-    
+
     protected static ?string $modelLabel = 'Incident';
-    
+
     protected static ?string $pluralModelLabel = 'Incidents';
-    
+
     protected static ?int $navigationSort = 3;
 
     public static function form(Form $form): Form

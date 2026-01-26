@@ -106,4 +106,3 @@ class AzureController extends Controller
         }
     }
 }
-

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->date('date_given')->nullable();
             $table->uuid('evidence_attachment_id')->nullable();
             $table->timestamps();
-            
+
             $table->index(['person_id', 'date_given']);
         });
     }

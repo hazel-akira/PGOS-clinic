@@ -18,7 +18,7 @@ return new class extends Migration
             $table->uuid('referral_letter_attachment_id')->nullable();
             $table->enum('status', ['PENDING', 'COMPLETED', 'CANCELLED'])->default('PENDING');
             $table->timestamps();
-            
+
             $table->index(['visit_id', 'status']);
         });
     }

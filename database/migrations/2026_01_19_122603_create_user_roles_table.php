@@ -15,7 +15,7 @@ return new class extends Migration
             $table->uuid('role_id');
             $table->foreign('role_id')->references('id')->on('app_roles')->onDelete('cascade');
             $table->timestamps();
-            
+
             $table->unique(['user_id', 'role_id']);
         });
     }

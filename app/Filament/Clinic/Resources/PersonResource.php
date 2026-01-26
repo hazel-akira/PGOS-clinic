@@ -11,20 +11,19 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
 
 class PersonResource extends Resource
 {
     protected static ?string $model = Person::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-users';
-    
+
     protected static ?string $navigationLabel = 'Students & Staff';
-    
+
     protected static ?string $modelLabel = 'Person';
-    
+
     protected static ?string $pluralModelLabel = 'Persons';
-    
+
     protected static ?int $navigationSort = 1;
 
     public static function form(Form $form): Form

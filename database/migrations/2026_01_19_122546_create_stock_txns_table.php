@@ -21,7 +21,7 @@ return new class extends Migration
             $table->foreign('performed_by_user_id')->references('id')->on('app_users')->onDelete('restrict');
             $table->timestamp('performed_at')->useCurrent();
             $table->timestamps();
-            
+
             $table->index(['batch_id', 'performed_at']);
             $table->index('txn_type');
         });

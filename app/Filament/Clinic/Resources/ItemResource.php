@@ -15,13 +15,13 @@ class ItemResource extends Resource
     protected static ?string $model = Item::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-beaker';
-    
+
     protected static ?string $navigationLabel = 'Items';
-    
+
     protected static ?string $modelLabel = 'Item';
-    
+
     protected static ?string $pluralModelLabel = 'Items';
-    
+
     protected static ?int $navigationSort = 5;
 
     public static function form(Form $form): Form
@@ -104,22 +104,22 @@ class ItemResource extends Resource
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make()
                     ->visible(function () {
-                    /** @var User|null $user */
-                    $user = filament()->auth()->user();
+                        /** @var User|null $user */
+                        $user = filament()->auth()->user();
 
-                    return $user?->hasRole('admin');
-                }),
+                        return $user?->hasRole('admin');
+                    }),
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make()
-                        ->visible(function () {
-                    /** @var User|null $user */
-                    $user = filament()->auth()->user();
+                    Tables\Actions\BulkActionGroup::make([
+                        Tables\Actions\DeleteBulkAction::make()
+                            ->visible(function () {
+                                /** @var User|null $user */
+                                $user = filament()->auth()->user();
 
-                    return $user?->hasRole('admin');
-                }),
-                ]),
+                                return $user?->hasRole('admin');
+                            }),
+                    ]),
             ]);
     }
 

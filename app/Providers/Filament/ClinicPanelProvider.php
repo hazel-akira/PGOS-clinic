@@ -2,25 +2,21 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Clinic\Pages\ClinicDashboard;
+use App\Http\Middleware\EnsureClinicRole;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
-use Filament\Pages;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
-use Filament\Widgets;
-use App\Filament\Clinic\Pages\ClinicDashboard;
-use App\Http\Middleware\EnsureClinicRole;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
-
-
 
 class ClinicPanelProvider extends PanelProvider
 {
@@ -44,6 +40,12 @@ class ClinicPanelProvider extends PanelProvider
                 ClinicDashboard::class,
             ])
             ->discoverWidgets(in: app_path('Filament/Clinic/Widgets'), for: 'App\\Filament\\Clinic\\Widgets')
+            ->widgets([
+               \App\Filament\Clinic\Widgets\QuickClinicActions::class,
+               \App\Filament\Clinic\Widgets\ClinicStats::class,
+               \App\Filament\Clinic\Widgets\EmergencyAlerts::class,
+            ])
+
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,
