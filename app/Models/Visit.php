@@ -23,6 +23,7 @@ class Visit extends Model
         'history_notes',
         'assessment_notes',
         'disposition',
+        'follow_up_notes',
         'created_by_user_id',
     ];
 

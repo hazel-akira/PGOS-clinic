@@ -9,8 +9,8 @@ class RoleSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * Creates roles for the School Clinic Management System:
+     * 
+     * Creates roles for the PGoS Clinic Management System:
      * - clinic_nurse: Can manage visits, triage, basic treatment
      * - doctor: Full access to medical records and treatment
      * - admin: System administration
@@ -24,6 +24,7 @@ class RoleSeeder extends Seeder
             'doctor',
             'admin',
             'principal_readonly',
+            'parent',
         ];
 
         foreach ($roles as $roleName) {

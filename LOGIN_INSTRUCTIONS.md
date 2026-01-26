@@ -12,6 +12,7 @@
 | **Clinic Nurse** | `nurse@schoolclinic.com` | `password` | Clinic operations |
 | **Doctor** | `doctor@schoolclinic.com` | `password` | Medical records & treatment |
 | **Principal** | `principal@schoolclinic.com` | `password` | Read-only access |
+| **Parent** | `parent@schoolclinic.com` | `password` | Read-only access |
 
 ## How to Login
 
@@ -45,6 +46,7 @@
 2. **Recreate users if needed:**
    ```bash
    php artisan db:seed --class=UserSeeder
+   php artisan db:seed --class=MedicationSeeder
    ```
  
 3. **Clear cache:**

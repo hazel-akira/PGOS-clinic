@@ -26,11 +26,14 @@ class ClinicPanelProvider extends PanelProvider
             ->default()
             ->id('clinic')
             ->path('clinic')
-            ->login()
+            ->login(\App\Filament\Clinic\Pages\Auth\Login::class)
             ->colors([
-                'primary' => Color::Blue,
+                'primary' => Color::hex('#1e3a5f'),
+                'secondary' => Color::hex('#df8811'),
             ])
-            ->brandName('School Clinic Portal')
+            ->brandName('PGoS Clinic Management System')
+            ->brandLogo(asset('pgos_logo.webp'))
+            ->favicon(asset('favicon.ico'))
             ->discoverResources(in: app_path('Filament/Clinic/Resources'), for: 'App\\Filament\\Clinic\\Resources')
             ->discoverPages(in: app_path('Filament/Clinic/Pages'), for: 'App\\Filament\\Clinic\\Pages')
             ->pages([
@@ -58,5 +61,27 @@ class ClinicPanelProvider extends PanelProvider
                 Authenticate::class,
                 EnsureClinicRole::class,
             ]);
+    }
+
+    public function register(): void
+    {
+        parent::register();
+        
+        // Register Azure SSO routes for clinic panel
+        $this->app['router']->middleware('web')->group(function () {
+            // Standard routes
+            \Illuminate\Support\Facades\Route::get('/clinic/login/azure/redirect', [\App\Http\Controllers\Auth\AzureController::class, 'redirect'])
+                ->name('filament.clinic.auth.azure.redirect')
+                ->defaults('panel', 'clinic');
+            
+            \Illuminate\Support\Facades\Route::get('/clinic/login/azure/callback', [\App\Http\Controllers\Auth\AzureController::class, 'callback'])
+                ->name('filament.clinic.auth.azure.callback');
+            
+            // Alternative routes with /auth/ for compatibility
+            \Illuminate\Support\Facades\Route::get('/clinic/login/auth/azure/redirect', [\App\Http\Controllers\Auth\AzureController::class, 'redirect'])
+                ->defaults('panel', 'clinic');
+            
+            \Illuminate\Support\Facades\Route::get('/clinic/login/auth/azure/callback', [\App\Http\Controllers\Auth\AzureController::class, 'callback']);
+        });
     }
 }

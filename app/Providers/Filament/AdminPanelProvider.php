@@ -29,7 +29,8 @@ class AdminPanelProvider extends PanelProvider
             ->login()
             ->brandName('PGOS ADMIN')
             ->colors([
-                'primary' => Color::Amber,
+                'primary' => Color::hex('#1e3a5f'),
+                'secondary' => Color::hex('#df8811'),
             ])
             ->discoverResources(
                 in: app_path('Filament/Admin/Resources'),

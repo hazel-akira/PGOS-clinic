@@ -3,6 +3,7 @@
 namespace App\Filament\Clinic\Resources;
 
 use App\Filament\Clinic\Resources\VisitResource\Pages;
+use App\Filament\Clinic\Resources\VisitResource\RelationManagers;
 use App\Models\Person;
 use App\Models\School;
 use App\Models\Visit;
@@ -94,6 +95,11 @@ class VisitResource extends Resource
                                 'AMBULANCE' => 'Ambulance',
                                 'ADMITTED_OBS' => 'Admitted for Observation',
                             ]),
+                        Forms\Components\Textarea::make('follow_up_notes')
+                            ->label('Follow-up Notes')
+                            ->rows(3)
+                            ->placeholder('Any follow-up instructions or notes for future visits')
+                            ->columnSpanFull(),
                     ])
                     ->columns(2),
             ]);
@@ -183,7 +189,9 @@ class VisitResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\VitalsRelationManager::class,
+            RelationManagers\DiagnosesRelationManager::class,
+            RelationManagers\TreatmentsRelationManager::class,
         ];
     }
 

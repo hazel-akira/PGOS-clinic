@@ -28,6 +28,17 @@ class DashboardController extends Controller
             return redirect('/clinic');
         }
 
+        // Parents go to parent panel
+        if ($user->hasRole('parent') || $user->guardian) {
+            return redirect('/parent');
+        }
+
+        // If user has no roles, show error or redirect to appropriate place
+        if ($user->roles->isEmpty() && !$user->guardian) {
+            // User has no role assigned - redirect to login with message
+            return redirect('/clinic/login')->with('error', 'No access role assigned. Please contact administrator.');
+        }
+
         // Default fallback to clinic panel
         return redirect('/clinic');
     }
