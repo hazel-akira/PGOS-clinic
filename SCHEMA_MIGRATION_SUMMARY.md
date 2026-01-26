@@ -115,3 +115,8 @@ All key indexes have been added as specified:
 3. Or use `app_users` as the primary user table and extend Laravel authentication
 
 This is a design decision you'll need to make based on your authentication strategy (Azure SSO uses Laravel users, but clinic operations use app_users).
+
+
+
+
+

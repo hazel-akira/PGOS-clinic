@@ -1,5 +1,4 @@
-<x-filament-panels::page>
-    <div style="background: #f0f4f8; min-height: 100vh; padding: 2rem;">
+<div style="background: #f0f4f8; min-height: 100vh; padding: 2rem;">
         @if($this->getStudents()->isEmpty())
             <div class="bg-white rounded-lg shadow p-12 text-center">
                 <svg class="w-24 h-24 mx-auto text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -192,35 +191,9 @@
                             </div>
                         </div>
 
-                        <!-- Right Column: Calendar, Appointments, Treatments -->
+                        <!-- Right Column: Sidebar -->
                         <div class="space-y-6">
-                            <!-- Calendar -->
-                            <div class="bg-white rounded-lg shadow p-6">
-                                <h4 class="text-lg font-bold " style="color: #1e3a5f;" mb-4>{{ now()->format('F Y') }}</h4>
-                                <div class="grid grid-cols-7 gap-1 mb-2">
-                                    @foreach(['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'] as $day)
-                                        <div class="text-center text-xs font-semibold " style="color: #1e3a5f;" py-1>{{ $day }}</div>
-                                    @endforeach
-                                </div>
-                                <div class="grid grid-cols-7 gap-1">
-                                    @php
-                                        $firstDay = now()->startOfMonth()->dayOfWeek;
-                                        $daysInMonth = now()->daysInMonth;
-                                        $currentDay = now()->day;
-                                    @endphp
-                                    @for($i = 0; $i < $firstDay; $i++)
-                                        <div class="aspect-square"></div>
-                                    @endfor
-                                    @for($day = 1; $day <= $daysInMonth; $day++)
-                                        <div class="aspect-square flex items-center justify-center text-sm rounded
-                                            {{ $day == $currentDay ? 'bg-blue-600 text-white font-semibold' : 'text-gray-700 hover:bg-gray-100' }}">
-                                            {{ $day }}
-                                        </div>
-                                    @endfor
-                                </div>
-                            </div>
-
-                            <!-- Upcoming Appointments -->
+                            {{-- <!-- Upcoming Appointments - Commented out -->
                             <div class="bg-white rounded-lg shadow p-6">
                                 <h4 class="text-lg font-bold " style="color: #1e3a5f;" mb-4>Upcoming Visits</h4>
                                 @if($student->visits->whereNull('departure_at')->isNotEmpty())
@@ -241,6 +214,7 @@
                                     <p class="text-sm " style="color: #1e3a5f;" text-center py-4>No upcoming visits</p>
                                 @endif
                             </div>
+                            --}}
 
                             <!-- Treatments/Prescriptions -->
                             <div class="bg-white rounded-lg shadow p-6">
@@ -335,4 +309,3 @@
             @endforeach
         @endif
     </div>
-</x-filament-panels::page>

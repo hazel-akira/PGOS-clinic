@@ -26,7 +26,7 @@ class ParentPanelProvider extends PanelProvider
         return $panel
             ->id('parent')
             ->path('parent')
-            ->login()
+            ->login(\App\Filament\Parent\Pages\Auth\Login::class)
             ->homeUrl(fn () => '/parent/dashboard')
             ->colors([
                 'primary' => Color::hex('#1e3a5f'),
@@ -62,5 +62,27 @@ class ParentPanelProvider extends PanelProvider
                 Authenticate::class,
                 EnsureParentRole::class,
             ]);
+    }
+
+    public function register(): void
+    {
+        parent::register();
+        
+        // Register Azure SSO routes for parent panel
+        $this->app['router']->middleware('web')->group(function () {
+            // Standard routes
+            \Illuminate\Support\Facades\Route::get('/parent/login/azure/redirect', [\App\Http\Controllers\Auth\AzureController::class, 'redirect'])
+                ->name('filament.parent.auth.azure.redirect')
+                ->defaults('panel', 'parent');
+            
+            \Illuminate\Support\Facades\Route::get('/parent/login/azure/callback', [\App\Http\Controllers\Auth\AzureController::class, 'callback'])
+                ->name('filament.parent.auth.azure.callback');
+            
+            // Alternative routes with /auth/ for compatibility
+            \Illuminate\Support\Facades\Route::get('/parent/login/auth/azure/redirect', [\App\Http\Controllers\Auth\AzureController::class, 'redirect'])
+                ->defaults('panel', 'parent');
+            
+            \Illuminate\Support\Facades\Route::get('/parent/login/auth/azure/callback', [\App\Http\Controllers\Auth\AzureController::class, 'callback']);
+        });
     }
 }

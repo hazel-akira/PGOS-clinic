@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 class EnsureClinicRole
@@ -15,18 +16,21 @@ class EnsureClinicRole
      */
     public function handle(Request $request, Closure $next): Response
     {
-        // Allow access to login/logout pages without authentication
+        // Allow access to login/logout pages and Azure SSO callbacks without authentication
         if ($request->is('clinic/login') || $request->is('clinic/logout') || 
+            $request->is('clinic/login/azure/*') || 
+            $request->is('clinic/login/auth/azure/*') ||
             $request->routeIs('filament.clinic.auth.login') || 
-            $request->routeIs('filament.clinic.auth.logout')) {
+            $request->routeIs('filament.clinic.auth.logout') ||
+            $request->routeIs('filament.clinic.auth.azure.*')) {
             return $next($request);
         }
 
-        if (!auth()->check()) {
+        if (!Auth::check()) {
             return redirect('/clinic/login');
         }
 
-        $user = auth()->user();
+        $user = Auth::user();
         
         // Allow admin, clinic_nurse, doctor, and principal_readonly
         if (!$user->hasAnyRole(['admin', 'clinic_nurse', 'doctor', 'principal_readonly'])) {
