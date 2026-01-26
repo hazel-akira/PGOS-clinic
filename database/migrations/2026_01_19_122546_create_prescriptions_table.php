@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('duration'); // e.g., 3 days
             $table->text('instructions')->nullable();
             $table->timestamps();
-            
+
             $table->index(['visit_id', 'item_id']);
         });
     }

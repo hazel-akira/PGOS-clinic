@@ -24,7 +24,7 @@ return new class extends Migration
             $table->uuid('taken_by_user_id');
             $table->foreign('taken_by_user_id')->references('id')->on('app_users')->onDelete('restrict');
             $table->timestamps();
-            
+
             $table->index(['visit_id', 'taken_at']);
         });
     }

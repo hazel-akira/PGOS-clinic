@@ -17,7 +17,7 @@ return new class extends Migration
             $table->boolean('is_primary')->default(false);
             $table->timestamp('recorded_at')->useCurrent();
             $table->timestamps();
-            
+
             $table->index(['visit_id', 'is_primary']);
         });
     }

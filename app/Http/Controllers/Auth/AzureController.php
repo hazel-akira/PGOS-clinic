@@ -33,4 +33,3 @@ class AzureController extends Controller
         return redirect()->intended(route('dashboard'));
     }
 }
-

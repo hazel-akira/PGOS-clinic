@@ -10,7 +10,7 @@ class EditMedicalSupply extends EditRecord
 {
     protected static string $resource = MedicalSupplyResource::class;
 
-  protected function getHeaderActions(): array
+    protected function getHeaderActions(): array
     {
         return [
             Actions\DeleteAction::make()
@@ -41,5 +41,4 @@ class EditMedicalSupply extends EditRecord
                 }),
         ];
     }
-
 }

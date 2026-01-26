@@ -15,14 +15,14 @@ class EnsureClinicRole
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!auth()->check()) {
+        if (! auth()->check()) {
             return redirect('/clinic/login');
         }
 
         $user = auth()->user();
-        
+
         // Allow admin, clinic_nurse, doctor, and principal_readonly
-        if (!$user->hasAnyRole(['admin', 'clinic_nurse', 'doctor', 'principal_readonly'])) {
+        if (! $user->hasAnyRole(['admin', 'clinic_nurse', 'doctor', 'principal_readonly'])) {
             abort(403, 'Unauthorized. Clinic access required.');
         }
 

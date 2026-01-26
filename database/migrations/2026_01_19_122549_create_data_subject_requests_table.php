@@ -17,14 +17,14 @@ return new class extends Migration
                 'RECTIFY',
                 'DELETE',
                 'PORTABILITY',
-                'RESTRICT'
+                'RESTRICT',
             ]);
             $table->timestamp('requested_at')->useCurrent();
             $table->enum('status', ['OPEN', 'IN_PROGRESS', 'COMPLETED', 'REJECTED'])->default('OPEN');
             $table->timestamp('closed_at')->nullable();
             $table->text('notes')->nullable();
             $table->timestamps();
-            
+
             $table->index(['person_id', 'status']);
         });
     }

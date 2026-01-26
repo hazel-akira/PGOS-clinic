@@ -18,13 +18,13 @@ class EditUser extends EditRecord
                 ->visible(fn () => auth()->user()->hasRole('admin')),
         ];
     }
-    
+
     protected function mutateFormDataBeforeSave(array $data): array
     {
         if (empty($data['password'])) {
             unset($data['password']);
         }
-        
+
         return $data;
     }
 }

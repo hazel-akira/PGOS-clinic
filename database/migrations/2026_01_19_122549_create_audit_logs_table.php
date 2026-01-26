@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('ip_address')->nullable();
             $table->json('metadata')->nullable();
             $table->timestamps();
-            
+
             $table->index(['entity_type', 'entity_id', 'timestamp']);
             $table->index(['user_id', 'timestamp']);
         });

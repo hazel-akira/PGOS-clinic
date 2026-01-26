@@ -16,7 +16,7 @@ return new class extends Migration
                 'CONSENT',
                 'IMMUNIZATION',
                 'INCIDENT',
-                'PROFILE'
+                'PROFILE',
             ]);
             $table->uuid('owner_id');
             $table->string('file_name');
@@ -27,7 +27,7 @@ return new class extends Migration
             $table->foreign('uploaded_by_user_id')->references('id')->on('app_users')->onDelete('restrict');
             $table->timestamp('uploaded_at')->useCurrent();
             $table->timestamps();
-            
+
             $table->index(['owner_type', 'owner_id']);
             $table->index('hash_sha256');
         });

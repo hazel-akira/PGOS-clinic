@@ -14,16 +14,16 @@ class EditMedication extends EditRecord
     {
         return [
             Actions\DeleteAction::make()
-            ->visible(function () {
+                ->visible(function () {
                     /** @var User|null $user */
                     $user = filament()->auth()->user();
 
                     return $user?->hasRole('admin');
                 }),
             Actions\RestoreAction::make()
-             ->color('success')
-             ->icon('heroicon-o-arrow-path')
-             ->visible(function () {
+                ->color('success')
+                ->icon('heroicon-o-arrow-path')
+                ->visible(function () {
                     /** @var User|null $user */
                     $user = filament()->auth()->user();
 
@@ -31,17 +31,17 @@ class EditMedication extends EditRecord
                 }),
 
             Actions\ForceDeleteAction::make()
-            ->visible(fn ($record) => $record->trashed())
-            ->visible(function () {
+                ->visible(fn ($record) => $record->trashed())
+                ->visible(function () {
                     /** @var User|null $user */
                     $user = filament()->auth()->user();
 
                     return $user?->hasRole('admin');
                 })
-            ->requiresConfirmation()
-            ->modalHeading('Permanently delete medication')
-            ->modalDescription('This action cannot be undone. This medication will be permanently removed from the system.')
-            ->modalSubmitActionLabel('Yes, delete permanently'),
+                ->requiresConfirmation()
+                ->modalHeading('Permanently delete medication')
+                ->modalDescription('This action cannot be undone. This medication will be permanently removed from the system.')
+                ->modalSubmitActionLabel('Yes, delete permanently'),
         ];
     }
 }

@@ -23,7 +23,7 @@ return new class extends Migration
             $table->uuid('campus_id')->nullable();
             $table->enum('status', ['ACTIVE', 'INACTIVE'])->default('ACTIVE');
             $table->timestamps();
-            
+
             $table->index(['person_type', 'status']);
             $table->index('adm_or_staff_no');
         });

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->uuid('supplier_id')->nullable();
             $table->foreign('supplier_id')->references('id')->on('suppliers')->onDelete('set null');
             $table->timestamps();
-            
+
             $table->index(['item_id', 'expiry_date']);
             $table->index('batch_no');
         });

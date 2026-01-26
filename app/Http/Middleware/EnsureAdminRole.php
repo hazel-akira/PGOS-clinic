@@ -15,10 +15,11 @@ class EnsureAdminRole
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!auth()->check() || !auth()->user()->hasRole('admin')) {
+        if (! auth()->check() || ! auth()->user()->hasRole('admin')) {
             abort(403, 'Unauthorized. Admin access required.');
         }
 
         return $next($request);
     }
+    
 }

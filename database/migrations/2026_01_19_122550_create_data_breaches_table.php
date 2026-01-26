@@ -17,7 +17,7 @@ return new class extends Migration
             $table->timestamp('data_subjects_notified_at')->nullable();
             $table->enum('status', ['OPEN', 'CONTAINED', 'CLOSED'])->default('OPEN');
             $table->timestamps();
-            
+
             $table->index('status');
         });
     }

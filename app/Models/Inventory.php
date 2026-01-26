@@ -11,6 +11,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Inventory extends Model
 {
     use HasUuid, SoftDeletes;
+    
+    protected $table = 'inventory';
 
     protected $fillable = [
         'medication_id',
@@ -94,11 +96,11 @@ class Inventory extends Model
     {
         $wasLowStock = $this->is_low_stock;
         $this->is_low_stock = $this->quantity_available <= $this->minimum_stock_level;
-        
-        if ($this->is_low_stock && !$wasLowStock) {
+
+        if ($this->is_low_stock && ! $wasLowStock) {
             $this->low_stock_alerted_at = now();
         }
-        
+
         $this->save();
     }
 }

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->boolean('active')->default(true);
             $table->timestamp('recorded_at')->useCurrent();
             $table->timestamps();
-            
+
             $table->index(['person_id', 'active']);
         });
     }

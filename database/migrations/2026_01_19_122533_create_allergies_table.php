@@ -17,7 +17,7 @@ return new class extends Migration
             $table->enum('severity', ['MILD', 'MODERATE', 'SEVERE'])->default('MILD');
             $table->timestamp('recorded_at')->useCurrent();
             $table->timestamps();
-            
+
             $table->index(['person_id', 'severity']);
         });
     }

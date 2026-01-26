@@ -4,7 +4,6 @@ namespace App\Models;
 
 use App\Traits\HasUuid;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Patient extends Model
@@ -64,19 +63,19 @@ class Patient extends Model
     }
 
     public function medicalProfile()
-{
-    return $this->hasOne(MedicalProfile::class);
-}
-public function visits()
-{
-    return $this->hasMany(Visit::class);
-}
-public function school()
-{
-    return $this->belongsTo(School::class);
-}
+    {
+        return $this->hasOne(MedicalProfile::class);
+    }
 
-   
+    public function visits()
+    {
+        return $this->hasMany(Visit::class);
+    }
+
+    public function school()
+    {
+        return $this->belongsTo(School::class);
+    }
 
     /**
      * Get the user who created this patient.

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->uuid('guardian_primary_id')->nullable();
             $table->foreign('guardian_primary_id')->references('id')->on('guardians')->onDelete('set null');
             $table->timestamps();
-            
+
             $table->index('class_id');
         });
     }

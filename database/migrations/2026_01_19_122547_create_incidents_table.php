@@ -25,7 +25,7 @@ return new class extends Migration
             $table->boolean('parents_notified')->default(false);
             $table->timestamp('parents_notified_at')->nullable();
             $table->timestamps();
-            
+
             $table->index(['person_id', 'occurred_at']);
             $table->index('severity');
         });

@@ -2,12 +2,12 @@
 
 /**
  * Audit Logging Configuration
- * 
+ *
  * This file prepares the system for audit logging of sensitive medical data access.
  * For production, consider using packages like:
  * - spatie/laravel-activitylog
  * - owen-it/laravel-auditing
- * 
+ *
  * Key requirements for healthcare compliance:
  * - Log all access to patient records
  * - Log all modifications to medical data

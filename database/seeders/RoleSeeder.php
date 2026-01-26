@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 
@@ -10,7 +9,7 @@ class RoleSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     * 
+     *
      * Creates roles for the School Clinic Management System:
      * - clinic_nurse: Can manage visits, triage, basic treatment
      * - doctor: Full access to medical records and treatment
@@ -31,6 +30,6 @@ class RoleSeeder extends Seeder
             Role::firstOrCreate(['name' => $roleName]);
         }
 
-        $this->command->info('Roles created successfully: ' . implode(', ', $roles));
+        $this->command->info('Roles created successfully: '.implode(', ', $roles));
     }
 }
