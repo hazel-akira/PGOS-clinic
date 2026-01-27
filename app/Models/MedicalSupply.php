@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class MedicalSupply extends Model
 {
     use HasUuid, SoftDeletes;
+    protected $keyType = 'string';
+    public $incrementing = false;
 
     protected $fillable = [
         'name',

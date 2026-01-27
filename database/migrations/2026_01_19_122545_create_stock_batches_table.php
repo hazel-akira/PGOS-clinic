@@ -10,19 +10,31 @@ return new class extends Migration
     {
         Schema::create('stock_batches', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('item_id');
-            $table->foreign('item_id')->references('id')->on('items')->onDelete('cascade');
-            $table->string('batch_no')->nullable();
-            $table->date('expiry_date')->nullable();
-            $table->integer('qty_on_hand');
-            $table->decimal('unit_cost', 12, 2)->nullable();
-            $table->uuid('supplier_id')->nullable();
-            $table->foreign('supplier_id')->references('id')->on('suppliers')->onDelete('set null');
-            $table->timestamps();
 
-            $table->index(['item_id', 'expiry_date']);
-            $table->index('batch_no');
+            $table->uuid('inventory_id');
+            $table->foreign('inventory_id')
+                ->references('id')
+                ->on('inventory')
+                ->onDelete('cascade');
+
+            $table->string('batch_no');
+            $table->date('expiry_date')->nullable();
+
+            $table->integer('qty_on_hand')->default(0);
+            $table->decimal('unit_cost', 10, 2)->nullable();
+
+            $table->uuid('supplier_id')->nullable();
+            $table->foreign('supplier_id')
+                ->references('id')
+                ->on('suppliers')
+                ->nullOnDelete();
+
+            $table->timestamps();
+            $table->softDeletes();
+
+            $table->index(['inventory_id', 'expiry_date']);
         });
+
     }
 
     public function down(): void
