@@ -32,6 +32,9 @@ class AdminPanelProvider extends PanelProvider
                 'primary' => Color::hex('#1e3a5f'),
                 'secondary' => Color::hex('#df8811'),
             ])
+            ->brandLogo(asset('pgos_logo.webp'))
+            ->favicon(asset('favicon.ico'))
+            ->brandLogoHeight('2.5vh')
             ->discoverResources(
                 in: app_path('Filament/Admin/Resources'),
                 for: 'App\\Filament\\Admin\\Resources'
@@ -67,5 +70,26 @@ class AdminPanelProvider extends PanelProvider
                 Authenticate::class,
                 EnsureAdminRole::class,
             ]);
+    }
+    public function register(): void
+    {
+        parent::register();
+        
+        // Register Azure SSO routes for admin panel
+        $this->app['router']->middleware('web')->group(function () {
+            // Standard routes
+            \Illuminate\Support\Facades\Route::get('/admin/login/azure/redirect', [\App\Http\Controllers\Auth\AzureController::class, 'redirect'])
+                ->name('filament.admin.auth.azure.redirect')
+                ->defaults('panel', 'admin');
+            
+            \Illuminate\Support\Facades\Route::get('/admin/login/azure/callback', [\App\Http\Controllers\Auth\AzureController::class, 'callback'])
+                ->name('filament.admin.auth.azure.callback');
+            
+            // Alternative routes with /auth/ for compatibility
+            \Illuminate\Support\Facades\Route::get('/admin/login/auth/azure/redirect', [\App\Http\Controllers\Auth\AzureController::class, 'redirect'])
+                ->defaults('panel', 'admin');
+            
+            \Illuminate\Support\Facades\Route::get('/admin/login/auth/azure/callback', [\App\Http\Controllers\Auth\AzureController::class, 'callback']);
+        });
     }
 }

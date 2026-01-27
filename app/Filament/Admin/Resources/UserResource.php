@@ -35,12 +35,10 @@ class UserResource extends Resource
                 ->required(fn ($livewire) => $livewire instanceof Pages\CreateUser)
                 ->visible(fn ($livewire) => $livewire instanceof Pages\CreateUser),
 
-            Forms\Components\Select::make('role')
-                ->options([
-                    'admin' => 'Admin',
-                    'clinic' => 'Clinic Staff',
-                ])
-                ->required(),
+            Forms\Components\Select::make('roles')
+                ->multiple()
+                ->relationship('roles', 'name')
+                ->preload(),
         ]);
     }
 
