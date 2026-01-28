@@ -13,7 +13,7 @@ class VisitMedication extends Model
     protected $fillable = [
         'visit_id',
         'medication_id',
-        'inventory_id',
+        'stock_batch_id',
         'dosage',
         'frequency',
         'quantity_issued',
@@ -28,8 +28,13 @@ class VisitMedication extends Model
         'quantity_issued' => 'integer',
     ];
 
+    /* -----------------------------------------------------------------
+     |  Relationships
+     | -----------------------------------------------------------------
+     */
+
     /**
-     * Get the visit for this medication issue.
+     * Visit where the medication was issued.
      */
     public function visit(): BelongsTo
     {
@@ -37,7 +42,7 @@ class VisitMedication extends Model
     }
 
     /**
-     * Get the medication that was issued.
+     * Medication that was issued.
      */
     public function medication(): BelongsTo
     {
@@ -45,15 +50,16 @@ class VisitMedication extends Model
     }
 
     /**
-     * Get the inventory batch that was used.
+     * Exact batch used to issue this medication.
+     * This enables expiry, supplier & recall tracking.
      */
-    public function inventory(): BelongsTo
+    public function stockBatch(): BelongsTo
     {
-        return $this->belongsTo(Inventory::class);
+        return $this->belongsTo(StockBatch::class);
     }
 
     /**
-     * Get the user who issued this medication.
+     * User who issued the medication.
      */
     public function issuer(): BelongsTo
     {

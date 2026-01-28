@@ -10,6 +10,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Medication extends Model
 {
     use HasUuid, SoftDeletes;
+    protected $keyType = 'string';
+    public $incrementing = false;
 
     protected $fillable = [
         'name',

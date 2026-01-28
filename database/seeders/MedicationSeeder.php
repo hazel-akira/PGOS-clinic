@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Medication;
 use Illuminate\Database\Seeder;
-
+use Illuminate\Support\Str;
 class MedicationSeeder extends Seeder
 {
     public function run(): void
@@ -113,6 +113,7 @@ class MedicationSeeder extends Seeder
                 ['name' => $medication['name']],
                 array_merge(
                     [
+                        'id' => (string) Str::uuid(),   // <-- force UUID here
                         'generic_name' => null,
                         'manufacturer' => null,
                         'description' => null,
@@ -126,5 +127,6 @@ class MedicationSeeder extends Seeder
                 )
             );
         }
+
     }
 }

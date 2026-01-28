@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\MedicalSupply;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class MedicalSupplySeeder extends Seeder
 {
@@ -40,11 +41,14 @@ class MedicalSupplySeeder extends Seeder
             MedicalSupply::updateOrCreate(
                 ['name' => $supply['name']],
                 [
+                    'id' => (string) Str::uuid(), 
                     'unit_of_measure' => $supply['unit_of_measure'],
                     'category' => $supply['category'],
                     'is_active' => true,
                 ]
             );
         }
+
+         
     }
 }

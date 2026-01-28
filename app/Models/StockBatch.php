@@ -6,13 +6,15 @@ use App\Traits\HasUuid;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 
 class StockBatch extends Model
 {
-    use HasUuid;
+    use HasUuid, SoftDeletes;
 
     protected $fillable = [
-        'item_id',
+        'inventory_id',
         'batch_no',
         'expiry_date',
         'qty_on_hand',
@@ -26,9 +28,9 @@ class StockBatch extends Model
         'unit_cost' => 'decimal:2',
     ];
 
-    public function item(): BelongsTo
+    public function inventory(): BelongsTo
     {
-        return $this->belongsTo(Item::class);
+        return $this->belongsTo(Inventory::class);
     }
 
     public function supplier(): BelongsTo
@@ -36,8 +38,13 @@ class StockBatch extends Model
         return $this->belongsTo(Supplier::class);
     }
 
-    public function stockTxns(): HasMany
+    public function transactions(): HasMany
     {
-        return $this->hasMany(StockTxn::class, 'batch_id');
+        return $this->hasMany(StockTransaction::class);
+    }
+
+    public function isExpired(): bool
+    {
+        return $this->expiry_date && $this->expiry_date->isPast();
     }
 }
