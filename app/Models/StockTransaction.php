@@ -14,7 +14,7 @@ class StockTransaction extends Model
         'stock_batch_id',
         'type', // in | out
         'quantity',
-        'reason',
+        'notes',
         'performed_by',
     ];
 
@@ -37,7 +37,7 @@ class StockTransaction extends Model
         $batch->transactions()->create([
             'type' => 'in',
             'quantity' => $quantity,
-            'reason' => 'Purchase / Supply',
+            'notes' => 'Purchase / Supply',
             'performed_by' => $userId,
         ]);
 
@@ -59,7 +59,7 @@ class StockTransaction extends Model
         $batch->transactions()->create([
             'type' => 'out',
             'quantity' => $quantity,
-            'reason' => $reason,
+            'notes' => $reason,
             'performed_by' => $userId,
         ]);
 
