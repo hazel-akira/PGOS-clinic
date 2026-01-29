@@ -35,6 +35,12 @@ class AdminPanelProvider extends PanelProvider
             ->brandLogo(asset('pgos_logo.webp'))
             ->favicon(asset('favicon.ico'))
             ->brandLogoHeight('2.5vh')
+            ->navigationGroups([
+                'Inventory Control',
+                'Access Control',
+                'Administration',
+                'System',
+            ])
             ->discoverResources(
                 in: app_path('Filament/Admin/Resources'),
                 for: 'App\\Filament\\Admin\\Resources'
