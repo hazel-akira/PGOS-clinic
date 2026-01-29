@@ -11,30 +11,24 @@ return new class extends Migration
         Schema::create('stock_batches', function (Blueprint $table) {
             $table->uuid('id')->primary();
 
+            // Link to inventory
             $table->uuid('inventory_id');
-            $table->foreign('inventory_id')
-                ->references('id')
-                ->on('inventory')
-                ->onDelete('cascade');
+            $table->foreign('inventory_id')->references('id')->on('inventory')->onDelete('cascade');
 
             $table->string('batch_no');
-            $table->date('expiry_date')->nullable();
-
             $table->integer('qty_on_hand')->default(0);
+            $table->date('expiry_date')->nullable();
             $table->decimal('unit_cost', 10, 2)->nullable();
 
+            // Optional supplier
             $table->uuid('supplier_id')->nullable();
-            $table->foreign('supplier_id')
-                ->references('id')
-                ->on('suppliers')
-                ->nullOnDelete();
-
             $table->timestamps();
             $table->softDeletes();
 
-            $table->index(['inventory_id', 'expiry_date']);
+            // Indexes
+            $table->index(['inventory_id', 'batch_no']);
+            $table->index('expiry_date');
         });
-
     }
 
     public function down(): void

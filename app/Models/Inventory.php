@@ -133,15 +133,6 @@ class Inventory extends Model
             ->orderBy('expiry_date');
     }
 
-    protected static function booted()
-    {
-        static::creating(function ($inventory) {
-            $inventory->quantity_available = $inventory->quantity_in - $inventory->quantity_out;
-        });
-
-        static::updating(function ($inventory) {
-            $inventory->quantity_available = $inventory->quantity_in - $inventory->quantity_out;
-        });
-    }
+    
 
 }

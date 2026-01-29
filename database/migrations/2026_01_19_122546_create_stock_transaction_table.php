@@ -14,7 +14,7 @@ return new class extends Migration
             $table->uuid('stock_batch_id');
             $table->foreign('stock_batch_id')->references('id')->on('stock_batches')->onDelete('cascade');
             $table->integer('quantity');
-            $table->text('reason')->nullable();
+            $table->text('notes')->nullable();
             $table->uuid('visit_id')->nullable();
             $table->foreign('visit_id')->references('id')->on('visits')->onDelete('set null');
             $table->uuid('performed_by')->nullable();

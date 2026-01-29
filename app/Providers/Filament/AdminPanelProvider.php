@@ -54,6 +54,7 @@ class AdminPanelProvider extends PanelProvider
                 Widgets\AccountWidget::class,
                 Widgets\FilamentInfoWidget::class,
                 \App\Filament\Admin\Widgets\AdminStats::class,
+                \App\Filament\Admin\Widgets\StockAlertsOverview::class,
             ])
             ->middleware([
                 EncryptCookies::class,
