@@ -76,7 +76,6 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-                EnsureAdminRole::class,
             ]);
     }
     public function register(): void
