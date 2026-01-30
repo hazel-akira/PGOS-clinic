@@ -16,9 +16,11 @@ class MedicationResource extends Resource
 {
     protected static ?string $model = Medication::class;
 
+    protected static ?string $navigationGroup = 'Pharmacy';
+
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    protected static ?int $navigationSort = 3;
+    protected static ?int $navigationSort = 1;
 
     public static function getEloquentQuery(): Builder
     {

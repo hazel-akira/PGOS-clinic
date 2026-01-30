@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Traits\HasUuid;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Medication extends Model
@@ -49,6 +50,14 @@ class Medication extends Model
     public function visitMedications(): HasMany
     {
         return $this->hasMany(VisitMedication::class);
+    }
+
+    /**
+     * All stock batches for this medication (through inventory).
+     */
+    public function batches(): HasManyThrough
+    {
+        return $this->hasManyThrough(StockBatch::class, Inventory::class, 'medication_id', 'inventory_id');
     }
 
     /**

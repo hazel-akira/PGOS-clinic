@@ -62,10 +62,10 @@ class StockBatchResource extends Resource
                 Tables\Columns\TextColumn::make('inventory.medication.name')->label('Medication')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('batch_no')->label('Batch #')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('qty_on_hand')->label('Qty Available')->sortable(),
-                Tables\Columns\TextColumn::make('expiry_date')->label('Expiry')->date()->sortable(),
                 Tables\Columns\TextColumn::make('supplier.name')->label('Supplier')->sortable()->toggleable(),
                 Tables\Columns\TextColumn::make('unit_cost')->money('KES')->label('Unit Cost')->toggleable(),
                 Tables\Columns\IconColumn::make('is_expired')->label('Expired?')->boolean()->state(fn ($record) => $record->isExpired()),
+                Tables\Columns\TextColumn::make('expiry_date')->label('Expiry')->date()->sortable(),
                 Tables\Columns\TextColumn::make('created_at')->date()->sortable(),
             ])
             ->filters([

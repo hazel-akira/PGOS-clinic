@@ -94,7 +94,17 @@ class InventoryResource extends Resource
 
                 Tables\Columns\TextColumn::make('total_stock_out')
                     ->label('Stock Out')
-                    ->getStateUsing(fn ($record) => $record->batches()->with('transactions')->get()->sum(fn ($batch) => $batch->transactions->where('type', 'out')->sum('quantity'))),
+                    ->getStateUsing(fn ($record) =>
+                        $record->batches()
+                            ->whereHas('transactions', fn ($q) =>
+                                $q->where('type', 'out')
+                            )
+                            ->withSum(['transactions as stock_out_sum' => fn ($q) =>
+                                $q->where('type', 'out')
+                            ], 'quantity')
+                            ->get()
+                            ->sum('stock_out_sum')
+                    ),
 
                 Tables\Columns\TextColumn::make('latest_batch')
                     ->label('Latest Batch')

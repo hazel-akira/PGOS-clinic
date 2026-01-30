@@ -56,6 +56,11 @@ class Visit extends Model
         return $this->hasMany(Prescription::class);
     }
 
+    public function visitMedications(): HasMany
+    {
+        return $this->hasMany(VisitMedication::class);
+    }
+
     /**
      * Get all vitals for this visit.
      */

@@ -20,6 +20,9 @@ class RoleResource extends Resource
     public static function form(Form $form): Form
     {
         return $form->schema([
+            Forms\Components\Hidden::make('guard_name')
+                ->default('web'),
+                
             Forms\Components\TextInput::make('name')
                 ->required()
                 ->unique(ignoreRecord: true),

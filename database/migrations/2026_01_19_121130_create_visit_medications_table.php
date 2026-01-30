@@ -21,8 +21,12 @@ return new class extends Migration
             $table->uuid('medication_id');
             $table->foreign('medication_id')->references('id')->on('medications')->onDelete('restrict');
 
-            $table->uuid('inventory_id')->nullable(); // Track which batch was used
-            $table->foreign('inventory_id')->references('id')->on('inventory')->onDelete('set null');
+           $table->uuid('stock_batch_id')->nullable();
+            $table->foreign('stock_batch_id')
+                ->references('id')
+                ->on('stock_batches')
+                ->onDelete('set null');
+
 
             // Dosage Information
             $table->string('dosage')->nullable(); // e.g., "1 tablet", "10ml"

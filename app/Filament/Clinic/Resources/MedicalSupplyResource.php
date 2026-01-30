@@ -16,9 +16,11 @@ class MedicalSupplyResource extends Resource
 {
     protected static ?string $model = MedicalSupply::class;
 
+    protected static ?string $navigationGroup = 'Pharmacy';
+
     protected static ?string $navigationIcon = 'heroicon-o-archive-box';
 
-    protected static ?int $navigationSort = 4;
+    protected static ?int $navigationSort = 2;
 
     public static function form(Form $form): Form
     {

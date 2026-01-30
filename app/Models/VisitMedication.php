@@ -53,9 +53,9 @@ class VisitMedication extends Model
      * Exact batch used to issue this medication.
      * This enables expiry, supplier & recall tracking.
      */
-    public function stockBatch(): BelongsTo
+    public function batch(): BelongsTo
     {
-        return $this->belongsTo(StockBatch::class);
+        return $this->belongsTo(StockBatch::class, 'stock_batch_id');
     }
 
     /**

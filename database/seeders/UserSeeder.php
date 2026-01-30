@@ -14,18 +14,6 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        // Create roles if they don't exist (using existing RoleSeeder roles)
-        $roles = [
-            'clinic_nurse',
-            'doctor',
-            'admin',
-            'principal_readonly',
-        ];
-
-        foreach ($roles as $roleName) {
-            Role::firstOrCreate(['name' => $roleName, 'guard_name' => 'web']);
-        }
-
         // Create default admin user
         $admin = User::firstOrCreate(
             ['email' => 'admin@schoolclinic.com'],

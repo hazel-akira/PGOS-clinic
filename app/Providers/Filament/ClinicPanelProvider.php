@@ -26,6 +26,7 @@ class ClinicPanelProvider extends PanelProvider
             ->default()
             ->id('clinic')
             ->path('clinic')
+            ->authGuard('web')
             ->login(\App\Filament\Clinic\Pages\Auth\Login::class)
             ->colors([
                 'primary' => Color::hex('#1e3a5f'),

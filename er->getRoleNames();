@@ -1,0 +1,12 @@
+[90m= [39m[34;4mApp\Models\User[39;24m {#7619
+    [34mid[39m: [35m1[39m,
+    [34mname[39m: "[32mSystem Administrator[39m",
+    [34memail[39m: "[32madmin@schoolclinic.com[39m",
+    [34memail_verified_at[39m: "[32m2026-01-29 13:07:51[39m",
+    #[33mpassword[39m: "[32m$2y$12$FYufk60b6ZQfwgnO/WSdmuA9mto0W5jKAugq1UJggXOvpNA90eSbu[39m",
+    #[33mremember_token[39m: [36mnull[39m,
+    [34mcreated_at[39m: "[32m2026-01-29 13:07:51[39m",
+    [34mupdated_at[39m: "[32m2026-01-29 13:07:51[39m",
+    [34mrole[39m: "[32mclinic[39m",
+  }
+
