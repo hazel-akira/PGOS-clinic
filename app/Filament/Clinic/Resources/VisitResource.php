@@ -9,6 +9,7 @@ use App\Models\School;
 use App\Models\Visit;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -192,6 +193,7 @@ class VisitResource extends Resource
             RelationManagers\VitalsRelationManager::class,
             RelationManagers\DiagnosesRelationManager::class,
             RelationManagers\TreatmentsRelationManager::class,
+            RelationManagers\VisitMedicationRelationManager::class,
         ];
     }
 
